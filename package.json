@@ -1,0 +1,23 @@
+{
+  "name": "session-example",
+  "version": "1.0.0",
+  "description": " Using session cookie for shopping cart",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -S"
+  },
+  "keywords": [
+    "node.js",
+    "session",
+    "cookie"
+  ],
+  "author": "Phambaonam",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "nunjucks": "^3.0.1",
+    "parseurl": "^1.3.2"
+  }
+}

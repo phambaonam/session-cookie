@@ -11,7 +11,7 @@
             /*
             * Perform some validation here.
             */
-            $.post("http://localhost:3000/login",{email:email,pass:pass},function(data){		
+            $.post("http://localhost:4000/login",{email:email,pass:pass},function(data){		
                 if(data==='done')			
                 {
                     window.location.href="/admin";
@@ -22,8 +22,9 @@
     </script>
     </head>
     <body>
-    <input type="text" size="40" placeholder="Type your email" id="email"><br />
-    <input type="password" size="40" placeholder="Type your password" id="password"><br />
-    <input type="button" value="Submit" id="submit">
+        <h1>Please login first.</h1>
+        <input type="text" size="40" placeholder="Type your email" id="email"><br />
+        <input type="password" size="40" placeholder="Type your password" id="password"><br />
+        <input type="button" value="Submit" id="submit">
     </body>
     </html>

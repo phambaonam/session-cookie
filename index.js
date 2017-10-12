@@ -5,6 +5,7 @@ const nunjucks = require('nunjucks')
 const bodyParser = require('body-parser')
 const app = express()
 
+let sess
 
 nunjucks.configure('views', {
   autoescape: true,
@@ -47,11 +48,21 @@ app.use(function (req, res, next) {
 
 
 app.get('/',(req, res) => {
-  console.log(req.sessionID)
+  // console.log(req.sessionID)
+  sess = req.session
+  sess.email ? res.redirect('/admin'): res.render('login')
+})
+app.post('/login',(req,res) => {
+	console.log('login',sess.id)
+	sess = req.session
+  sess.email = req.body.email
+  res.end('done')
+});
 
-  res.render('index', {
-    session: req.sessionID
-  })
+app.get('/admin',function(req,res){
+	sess=req.session;
+  console.log('admin',sess.id)
+  sess.email ? res.render('admin', { email: sess.email}) : res.render('login')
 })
 
 app.get('/foo', function (req, res, next) {
@@ -70,6 +81,13 @@ app.get('/bar', function (req, res, next) {
     time: req.session.views['/bar']
   })
 })
+
+app.get('/logout',function(req,res){
+	req.session.destroy((err) => {
+    err ? console.log(err) :	res.redirect('/')
+	})
+
+});
 
 app.listen(4000, function () {
     console.log(` server on running on port 4000! `)

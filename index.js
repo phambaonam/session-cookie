@@ -5,13 +5,6 @@ const nunjucks = require('nunjucks')
 const bodyParser = require('body-parser')
 const app = express()
 
-app.use(session({
-  secret: 'namduyen',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 300000  
-}
-}))
 
 nunjucks.configure('views', {
   autoescape: true,
@@ -22,7 +15,15 @@ nunjucks.configure('views', {
 app.engine('html',nunjucks.render)
 
 app.set('view engine','html')
-// app.use(session({secret: 'namduyen',saveUninitialized: true,resave: true}));
+
+app.use(session({
+  secret: 'doraemon',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { 
+    maxAge: 300000  
+  }
+}))
 app.use(bodyParser.urlencoded({
   extended: true
 }))

@@ -53,3 +53,45 @@
 
 * https://techtalk.vn/session-va-cookies.html
 
+# Cookie, session trong node.js
+### Sử dụng session-express trong ứng dụng node.js
+* Session thì không bắt buộc phải lưu trên store, 
+* Cấu hình để tạo cookie, session:
+```javascript
+    app.set('trust proxy', 1)
+    app.use(session({
+        secret: 'FMS',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { 
+            maxAge: 300000,
+            secure: false 
+        }
+    }))
+```
+
+* secret: là chữ ký cho session ID cookie và `Required option`.
+
+* cookie.secure: 
+    * Khi xét `secure: true` chạy trên phương thức HTTP thì cookie sẽ ko dc lưu trên trình duyệt, cookie đc lưu khi chạy trên phương thức HTTPS 
+
+     `Please note that secure: true is a ``recommended`` option. However, it requires an https-enabled website, i.e., HTTPS is necessary for secure cookies. If secure is set, and you access your site over HTTP, the cookie will not be set`
+    Khi đó ta phải thêm `trust proxy` trong phần cài đặt express để lưu dc cookie trên trình duyệt khi trên chạy phương thức HTTP
+
+* name: 
+    * Là tên của session ID cookie được truyền vào response gửi cho client khi mà client gửi requset đầu tiên tới máy chủ (lần đầu tiên truy cập vào trang web).
+    *  Default value của cookie trên trình duyệt là `connect.sid`
+    ![cookie](./images/cookie.png)
+
+        `The name of the session ID cookie to set in the response (and read from in the request).`
+
+* resave: 
+
+* saveUninitialized: 
+
+* req.session:
+
+* req.session.id:
+    * Session luôn là unique ID, nó là alias của `req.sessionID` và không thể sửa đổi. Nó được tạo ra từ `object session` với property `secret`
+
+* req.sessionID
